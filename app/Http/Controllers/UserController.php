@@ -49,6 +49,7 @@ class UserController extends Controller
         $userInfo = Userinfo::create([
             'accountName' => $request->get('name'),
             'email' => $request->get('email'),
+            'tradePoint' => "1234",
         ]);
 
 
