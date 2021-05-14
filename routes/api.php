@@ -4,7 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserinfoController;
-use App\Http\Controllers\ApiTestController;
+use App\Http\Controllers\SellController;
 
 
 
@@ -27,6 +27,7 @@ Route::post('register', [UserController::class, 'register']);
 Route::post('login', [UserController::class, 'authenticate']);
 Route::post('updateUserInfo', [UserinfoController::class, 'updateUserInfo']);
 Route::post('getUserInfo', [UserinfoController::class, 'getUserInfo']);
+Route::get('getSellData', [SellController::class, 'getSellData']);
 
 
 
