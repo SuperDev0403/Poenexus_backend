@@ -27,7 +27,7 @@ Route::post('register', [UserController::class, 'register']);
 Route::post('login', [UserController::class, 'authenticate']);
 Route::post('updateUserInfo', [UserinfoController::class, 'updateUserInfo']);
 Route::post('getUserInfo', [UserinfoController::class, 'getUserInfo']);
-Route::get('getSellData', [SellController::class, 'getSellData']);
+Route::post('getSellData', [SellController::class, 'getSellData']);
 
 
 

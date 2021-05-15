@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Bench;
 use App\Models\Harvest;
 use App\Models\Syndicate;
+use App\Models\Userinfo;
 
 class SellController extends Controller
 {
@@ -16,12 +17,13 @@ class SellController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function getSellData()
+    public function getSellData(Request $request)
     {
         $bench = Bench::all();
         $harvest = Harvest::all();
         $syndicate = Syndicate::all();
+        $userinfo = Userinfo::where('id', $request->get('userId'))->first();
     
-        return response()->json(compact('bench', 'harvest', 'syndicate'),200);
+        return response()->json(compact('bench', 'harvest', 'syndicate', 'userinfo'),200);
     }
 }
