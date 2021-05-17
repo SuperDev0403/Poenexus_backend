@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserinfoController;
 use App\Http\Controllers\SellController;
+use App\Http\Controllers\BuyController;
 
 
 
@@ -29,6 +30,8 @@ Route::post('updateUserInfo', [UserinfoController::class, 'updateUserInfo']);
 Route::post('getUserInfo', [UserinfoController::class, 'getUserInfo']);
 Route::post('getSellData', [SellController::class, 'getSellData']);
 Route::post('saveSell', [SellController::class, 'saveSell']);
+Route::get('getPriceChaos', [BuyController::class, 'getPriceChaos']);
+Route::post('getBuyData', [BuyController::class, 'getBuyData']);
 
 
 
