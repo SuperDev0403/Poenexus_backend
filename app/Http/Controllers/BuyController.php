@@ -21,11 +21,11 @@ class BuyController extends Controller
      */
     public function getBuyData(Request $request)
     {
+        $sell = Sell::all();
         $bench = Bench::all();
         $harvest = Harvest::all();
         $syndicate = Syndicate::all();
         $userinfo = Userinfo::where('id', $request->get('userId'))->first();
-        $sell = Sell::all();
     
         return response()->json(compact('bench', 'harvest', 'syndicate', 'userinfo', 'sell'),200);
     }
