@@ -32,6 +32,7 @@ Route::post('getSellData', [SellController::class, 'getSellData']);
 Route::post('saveSell', [SellController::class, 'saveSell']);
 Route::get('getPriceChaos', [BuyController::class, 'getPriceChaos']);
 Route::post('getBuyData', [BuyController::class, 'getBuyData']);
+Route::post('saveTransaction', [BuyController::class, 'saveTransaction']);
 
 
 

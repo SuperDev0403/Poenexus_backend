@@ -46,7 +46,7 @@ class SellController extends Controller
             'objid' => $request->get('objid'),
             'price_c' => $request->get('price_c'),
             'price_ex' => $request->get('price_ex'),
-            'timestamp' => $request->get('timestamp'),
+            'timestamp' => date('Y-m-d H:i:s'),
             'available' => $request->get('available'),
         ]);
 

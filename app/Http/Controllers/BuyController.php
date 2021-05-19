@@ -10,6 +10,7 @@ use App\Models\Harvest;
 use App\Models\Syndicate;
 use App\Models\Userinfo;
 use App\Models\Sell;
+use App\Models\Transaction;
 
 class BuyController extends Controller
 {
@@ -38,9 +39,36 @@ class BuyController extends Controller
      */
     public function getPriceChaos()
     {
-        // return "hi";
         $response = Http::get('https://poe.ninja/api/data/CurrencyOverview?league=Ultimatum&type=Currency&language=en');
     
         return $response;
+    }
+    
+    /**
+     * Save data in transaction
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function saveTransaction(Request $request)
+    {
+        $transaction = Transaction::create([
+            'reqTS' => date('Y-m-d H:i:s'),
+            'sellObjId' => $request->get('sellObjId'),
+            'sellUid' => $request->get('sellUid'),
+            'sellerId' => $request->get('sellerId'),
+            'sellIgn' => $request->get('sellIgn'),
+            'buyerId' => $request->get('buyerId'),
+            'buyIgn' => $request->get('buyIgn'),
+            'converted' => $request->get('converted'),
+            'notified' => null,
+            'noteTS' => null,
+            'completed' => null,
+            'compTS' => null,
+            'buyHasReq' => true,
+            'buyHasReqTS' => date('Y-m-d H:i:s'),
+        ]);
+    
+        return response()->json(compact('transaction'),200);
     }
 }
