@@ -1,8 +1,12 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\Userinfo;
 use Illuminate\Http\Request;
+use App\Models\Userinfo;
+use App\Models\Sell;
+use App\Models\Bench;
+use App\Models\Harvest;
+use App\Models\Syndicate;
 
 class UserinfoController extends Controller
 {
@@ -37,7 +41,27 @@ class UserinfoController extends Controller
      */
     public function getUserInfo(Request $request)
     {
+
         $user = Userinfo::where('id', $request->get('id'))->first();
-        return response()->json(compact('user'),200);
+        $sellList = Sell::where('userId', $request->get('id'))->get();
+        for ($i = 0; $i < count($sellList); $i++) {
+            $type = $sellList[$i]->type;
+            switch ($type) {
+                case "syndicate":
+                    $craft = Syndicate::where('UID', $sellList[$i]->objid)->first();
+                    $sellList[$i]->craft = $craft;
+                  break;
+                case "bench":
+                    $craft = Bench::where('UID', $sellList[$i]->objid)->first();
+                    $sellList[$i]->craft = $craft;
+                  break;
+                case "harvest":
+                    $craft = Harvest::where('UID', $sellList[$i]->objid)->first();
+                    $sellList[$i]->craft = $craft;
+                  break;
+                default:
+            }
+        }
+        return response()->json(compact('user', 'sellList'),200);
     }
 }
