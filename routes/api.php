@@ -30,6 +30,7 @@ Route::post('updateUserInfo', [UserinfoController::class, 'updateUserInfo']);
 Route::post('getUserInfo', [UserinfoController::class, 'getUserInfo']);
 Route::post('getSellData', [SellController::class, 'getSellData']);
 Route::post('saveSell', [SellController::class, 'saveSell']);
+Route::post('cancelSellObj', [SellController::class, 'cancelSellObj']);
 Route::get('getPriceChaos', [BuyController::class, 'getPriceChaos']);
 Route::post('getBuyData', [BuyController::class, 'getBuyData']);
 Route::post('saveTransaction', [BuyController::class, 'saveTransaction']);

@@ -52,4 +52,26 @@ class SellController extends Controller
 
         return response()->json(compact('sell'),200);
     }
+
+    /**
+     * cancel Sell Data.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function cancelSellObj(Request $request)
+    {
+        $query = Sell::where('id', $request->get('id'))
+            ->update(['available' => false]);
+
+        if ($query) {
+            return response()->json([
+                'status' => "success",
+            ]);
+        } else {
+            return response()->json([
+                'status' => "error",
+            ]);
+        }
+    }
 }
