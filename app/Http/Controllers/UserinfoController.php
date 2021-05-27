@@ -7,6 +7,7 @@ use App\Models\Sell;
 use App\Models\Bench;
 use App\Models\Harvest;
 use App\Models\Syndicate;
+use App\Models\Transaction;
 
 class UserinfoController extends Controller
 {
@@ -62,6 +63,26 @@ class UserinfoController extends Controller
                 default:
             }
         }
-        return response()->json(compact('user', 'sellList'),200);
+        $buyList = Transaction::where('sellerId', $request->get('id'))->get();
+        for ($i = 0; $i < count($buyList); $i++) {
+            $sellObjId = $buyList[$i]->sellObjId;
+            $buyList[$i]->sellInfo = Sell::where('id', $sellObjId)->first();
+            switch ($buyList[$i]->sellInfo->type) {
+                case "syndicate":
+                    $craft = Syndicate::where('UID', $buyList[$i]->sellInfo->objid)->first();
+                    $buyList[$i]->craft = $craft;
+                  break;
+                case "bench":
+                    $craft = Bench::where('UID', $buyList[$i]->sellInfo->objid)->first();
+                    $buyList[$i]->craft = $craft;
+                  break;
+                case "harvest":
+                    $craft = Harvest::where('UID', $buyList[$i]->sellInfo->objid)->first();
+                    $buyList[$i]->craft = $craft;
+                  break;
+                default:
+            }
+        }
+        return response()->json(compact('user', 'sellList', 'buyList'),200);
     }
 }
