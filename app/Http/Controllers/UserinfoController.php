@@ -8,6 +8,7 @@ use App\Models\Bench;
 use App\Models\Harvest;
 use App\Models\Syndicate;
 use App\Models\Transaction;
+use App\Models\Ratings;
 
 class UserinfoController extends Controller
 {
@@ -84,5 +85,39 @@ class UserinfoController extends Controller
             }
         }
         return response()->json(compact('user', 'sellList', 'buyList'),200);
+    }
+
+    /**
+     * accept Object.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function acceptObj(Request $request)
+    {
+      $query = Sell::where('id', $request->get('sellId'))
+            ->update(['available' => false]);
+
+      $query1 = Transaction::where('id', $request->get('txId'))
+            ->update([
+              'completed' => true,
+              'compTS' => date('Y-m-d H:i:s')
+            ]);
+      $query2 = Ratings::create([
+              'txId' => $request->get('txId'),
+              'sellerId' => $request->get('sellId'),
+              'buyerId' => $request->get('buyerId'),
+              'rating' => $request->get('rating')
+          ]);
+
+      if ($query && $query1 && $query2) {
+          return response()->json([
+              'status' => "success",
+          ]);
+      } else {
+          return response()->json([
+              'status' => "error",
+          ]);
+      }
     }
 }

@@ -26,11 +26,15 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('register', [UserController::class, 'register']);
 Route::post('login', [UserController::class, 'authenticate']);
+
 Route::post('updateUserInfo', [UserinfoController::class, 'updateUserInfo']);
 Route::post('getUserInfo', [UserinfoController::class, 'getUserInfo']);
+Route::post('acceptObj', [UserinfoController::class, 'acceptObj']);
+
 Route::post('getSellData', [SellController::class, 'getSellData']);
 Route::post('saveSell', [SellController::class, 'saveSell']);
 Route::post('cancelSellObj', [SellController::class, 'cancelSellObj']);
+
 Route::get('getPriceChaos', [BuyController::class, 'getPriceChaos']);
 Route::post('getBuyData', [BuyController::class, 'getBuyData']);
 Route::post('saveTransaction', [BuyController::class, 'saveTransaction']);
