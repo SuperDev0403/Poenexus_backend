@@ -84,7 +84,9 @@ class UserinfoController extends Controller
                 default:
             }
         }
-        return response()->json(compact('user', 'sellList', 'buyList'),200);
+
+        $rating = Ratings::where('sellerId', $request->get('id'))->get();
+        return response()->json(compact('user', 'sellList', 'buyList', 'rating'),200);
     }
 
     /**
