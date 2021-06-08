@@ -83,6 +83,8 @@ class UserinfoController extends Controller
                   break;
                 default:
             }
+            $buyerId = $buyList[$i]->buyerId;
+            $buyList[$i]->buyerRating = Ratings::where('buyerId', $buyerId)->get();
         }
 
         $rating = Ratings::where('sellerId', $request->get('id'))->get();
